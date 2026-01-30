@@ -56,7 +56,12 @@ def get_settings() -> Settings:
     jwt_secret_key = os.getenv("JWT_SECRET_KEY", "").strip()
     jwt_algorithm = os.getenv("JWT_ALGORITHM", "HS256").strip()
     access_token_exp_minutes = int(os.getenv("ACCESS_TOKEN_EXP_MINUTES", "10080"))
-    cors_allow_origins_raw = os.getenv("CORS_ALLOW_ORIGINS", "*").strip()
+    # When allow_credentials=True, browsers reject Access-Control-Allow-Origin="*".
+    # So we default to common dev origins rather than "*".
+    cors_allow_origins_raw = os.getenv(
+        "CORS_ALLOW_ORIGINS",
+        "http://localhost:3000,http://127.0.0.1:3000",
+    ).strip()
     site_url = os.getenv("SITE_URL", "").strip() or None
 
     if cors_allow_origins_raw == "*":
