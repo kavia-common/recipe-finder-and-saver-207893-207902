@@ -1,0 +1,4 @@
+{
+    "command": "pytest",
+    "working_directory": "/home/kavia/workspace/code-generation/recipe-finder-and-saver-207893-207902/recipe_backend"
+}
